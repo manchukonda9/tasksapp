@@ -14,7 +14,7 @@ class DashBoard extends Component {
         this.getData()
     }
     getData = () => {
-        axios.get("http://localhost:9000/Todos")
+        axios.get("/v1/Todos")
             .then((response) => {
                
                 this.setState({ todosItem: response.data })
@@ -30,7 +30,7 @@ class DashBoard extends Component {
         }
         else if (this.state.editIndex !== "") {
             const editData = { id: this.state.editIndex, item: this.state.text }
-            axios.put("http://localhost:9000/Todos/Edit/"+this.state.editIndex, editData)
+            axios.put("/v1/Todos/Edit/"+this.state.editIndex, editData)
                 .then((res) => {
                     this.getData();
                 })
@@ -38,7 +38,7 @@ class DashBoard extends Component {
         else {
             const items = this.state.todosItem;
             const itemlength = items.length
-            axios.post("http://localhost:9000/Todos/Add", {
+            axios.post("/v1/Todos/Add", {
                 id: itemlength+3,
                 item: this.state.text
             })
@@ -65,7 +65,7 @@ class DashBoard extends Component {
         if(selectedItem.item === this.state.text){
             this.setState({text: '', editIndex: "", edit: null})
         }
-            axios.delete("http://localhost:9000/Todos/Done/"+id)
+            axios.delete("/v1/Todos/Done/"+id)
                 .then((res) => {
                     this.getData();
                 })
