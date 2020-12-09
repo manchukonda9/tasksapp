@@ -5,12 +5,12 @@ const port = 9000
 app.use(cors());
 app.use(express.json())
 const Todos = []
-app.get("/Todos", (req, res) => res.send(Todos))
-app.post("/Todos/Add", (req, res) => {
+app.get("/v1/Todos", (req, res) => res.send(Todos))
+app.post("/v1/Todos/Add", (req, res) => {
     Todos.push(req.body)
     res.send(Todos);
 })
-app.put("/Todos/Edit/:id", (req, res) => {
+app.put("/v1/Todos/Edit/:id", (req, res) => {
     const id = req.params.id
     const findItem = Todos.findIndex(v => {
         return v.id == id;
@@ -18,7 +18,7 @@ app.put("/Todos/Edit/:id", (req, res) => {
     Todos[findItem] = req.body;
     res.send(Todos)
 })
-app.delete("/Todos/Done/:id", (req, res) => {
+app.delete("/v1/Todos/Done/:id", (req, res) => {
     const iD = req.params.id;
     const findItem = Todos.findIndex(v => {
         return v.id == iD;
